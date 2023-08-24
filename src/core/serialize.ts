@@ -2,6 +2,9 @@ import { toValue } from 'vue'
 import type { Arguments, KeyRef } from '../types'
 import { stableHash } from '../utils/hash'
 
+/**
+ * 序列化 key
+ */
 export const serialize = (key: KeyRef): [string, Arguments] => {
   key = toValue(key)
   const args = key

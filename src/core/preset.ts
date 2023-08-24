@@ -6,8 +6,8 @@ import {
   noop,
 } from '../utils/shared'
 
-const isOnline = ref(true)
-const isVisible = ref(true)
+const isOnline = ref(true) // 网络是否可用
+const isVisible = ref(true) // 页面是否可见
 
 const [onWindowEvent, offWindowEvent] =
   isWindowDefined && window.addEventListener

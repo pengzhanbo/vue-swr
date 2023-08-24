@@ -1,3 +1,7 @@
+/**
+ * 预请求，根据 key 值 预先请求数据并缓存
+ * 后续相同 key 的请求将直接使用 预加载缓存
+ */
 import type {
   Fetcher,
   FetcherResponse,
@@ -17,6 +21,7 @@ function preload<Data = unknown, Error = unknown, Key extends KeyRef = KeyRef>(
   const { cache } = config
   const { PRELOAD } = globalCache.get(cache)! as GlobalState<Data>
   const [key, fnArg] = serialize(keyRef)
+
   if (PRELOAD[key]) return PRELOAD[key]
   return (PRELOAD[key] = fetcher(fnArg))
 }

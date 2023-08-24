@@ -125,7 +125,7 @@ function useSWRHandler<
     }
 
     // 如果请求时间过长，则触发 onLoadSlow 回调
-    // todo 是否将 请求时间过长认为是一种 错误处理？
+    // TODO 是否将 请求时间过长认为是一种 错误处理？
     let isTimeout = false
     loadingTimer =
       loadingTimeout > 0 && !loadingTimer

@@ -8,9 +8,9 @@ export const createCacheHelper = <Data = unknown>(
   cache: Cache<[Data, number]>,
   key: string,
 ): readonly [
-  (value: Data) => void,
-  () => [Data, number] | undefined,
-  () => void,
+  (value: Data) => void, // setter
+  () => [Data, number] | undefined, // getter
+  () => void, // delete
 ] => {
   const getCache = () => cache.get(key)
   const setCache = (value: Data) =>
