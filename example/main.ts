@@ -1,18 +1,22 @@
 import { createApp, ref, watch } from 'vue'
-import useSWR, { useSWRPreload } from 'vue-swr'
+import useSWR from 'vue-swr'
 import App from './App.vue'
 
 createApp(App).mount('#app')
 
-useSWRPreload('/api')
+// useSWRPreload('/api')
 
-const { isLoading, data, error } = useSWR(ref('/api'))
-setTimeout(() => useSWR('/api'), 2100)
-
+const { isLoading, data, error, trigger } = useSWR(ref('/api'), {
+  immediate: false,
+})
+// setTimeout(() => useSWR('/api'), 2100)
+trigger()
+trigger()
+trigger()
 watch(
   () => data.value,
-  (error) => {
+  (data) => {
     // eslint-disable-next-line no-console
-    console.log(error)
+    console.log(data)
   },
 )

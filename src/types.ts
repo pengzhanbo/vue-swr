@@ -48,13 +48,49 @@ export interface PublicConfiguration<
   Error = unknown,
   Fn extends Fetcher<Data> = BareFetcher<Data>,
 > {
-  loadingTimeout: number
-  dedupingInterval: number
-
+  /**
+   * 是否立即执行请求
+   */
   immediate: boolean
 
-  fallbackData?: Data
+  /**
+   * 加载超时时间，单位：ms
+   */
+  loadingTimeout: number
+  /**
+   * 数据缓存时间，单位：ms
+   */
+  dedupingInterval: number
 
+  /**
+   * 自动重新请求时间间隔，单位：ms
+   * @default 0
+   */
+  refreshInterval: number
+  /**
+   * 是否在重新获取焦点时重新请求
+   */
+  revalidateOnFocus: boolean
+  /**
+   * 是否在回复连接时重新请求
+   */
+  revalidateOnReconnect: boolean
+  /**
+   * 是否在组件挂载时启用自动重新请求
+   */
+  revalidateOnMount: boolean
+  /**
+   * 在一段时间内只重新验证一次，单位：ms
+   */
+  focusThrottleInterval: number
+
+  /**
+   * 回退数据
+   */
+  fallbackData?: Data
+  /**
+   * 请求函数
+   */
   fetcher: Fn
 
   onSuccess?: (
@@ -74,8 +110,17 @@ export interface PublicConfiguration<
     config: Readonly<PublicConfiguration<Data, Error, Fn>>,
   ) => void
 
+  /**
+   * 是否在请求失败时重试
+   */
   shouldRetryOnError: boolean
+  /**
+   * 重试间隔
+   */
   errorRetryInterval: number
+  /**
+   * 最大重试次数
+   */
   errorRetryCount: number
 
   onErrorRetry?: (
